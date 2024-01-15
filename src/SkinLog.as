@@ -1,5 +1,7 @@
 void LogPlayerSkin(CTrackManiaNetworkServerInfo@ si, CTrackManiaPlayerInfo@ player) {
     SeenSkin(player);
+    // don't log server
+    if (si.ServerLogin == player.Login) return;
     Skin_Logs.InsertLast(Skin_Log(si, player));
 }
 
@@ -119,7 +121,7 @@ class Skin_Log {
     }
 
     string AsCSVRow() {
-        return StripFormatCodes('' + loadTime + string::Join({Name, Login, WebServicesUserId, Model_CarSport_SkinName, Prestige_SkinOptions, Model_CarSport_SkinUrl, Model_CharacterPilot_SkinName, Character_SkinOptions, Model_CharacterPilot_SkinUrl, ServerName, ServerLogin}, ', '));
+        return StripFormatCodes(string::Join({tostring(loadTime), Name, Login, WebServicesUserId, Model_CarSport_SkinName, Prestige_SkinOptions, Model_CarSport_SkinUrl, Model_CharacterPilot_SkinName, Character_SkinOptions, Model_CharacterPilot_SkinUrl, ServerName, ServerLogin}, ', '));
     }
 }
 
@@ -127,6 +129,7 @@ class Skin_Log {
 void ExportSkinLogCSV() {
     auto filename = "SkinLog_" + Time::Stamp + ".csv";
     IO::File f(IO::FromStorageFolder(filename), IO::FileMode::Write);
+    f.WriteLine("Timestamp, Name, Login, WebServicesUserId, Model_CarSport_SkinName, Prestige_SkinOptions, Model_CarSport_SkinUrl, Model_CharacterPilot_SkinName, Character_SkinOptions, Model_CharacterPilot_SkinUrl, ServerName, ServerLogin");
     for (uint i = 0; i < Skin_Logs.Length; i++) {
         f.WriteLine(Skin_Logs[i].AsCSVRow());
     }

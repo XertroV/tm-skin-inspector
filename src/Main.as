@@ -2,11 +2,29 @@ const string PLUGIN_NAME = Meta::ExecutingPlugin().Name;
 const string PLUGIN_ICON = Icons::Car + Icons::ListAlt;
 const string MenuTitle = "\\$8f3" + PLUGIN_ICON + "\\$z " + PLUGIN_NAME;
 
+#if DEPENDENCY_GHOSTS_PP || DEV
+bool HAS_GPP = true;
+#else
+bool HAS_GPP = false;
+#endif
+
+#if DEPENDENCY_GHOSTS_DEV || DEV
+const string GPP_NAME = "ghosts++-dev";
+#else
+const string GPP_NAME = "ghosts-pp";
+#endif
+
+bool GPP_DependencyCheck() {
+    // just calling code, so not relyant on the plugin being enabled i think.
+    return HAS_GPP; // && Meta::GetPluginFromID(GPP_NAME).Enabled;
+}
+
 [Setting hidden]
 bool g_AfterCSVOpenFolder = false;
 
 void Main() {
     startnew(WatchSkins);
+    trace("G++ detected: " + HAS_GPP);
 }
 
 void Unload() {

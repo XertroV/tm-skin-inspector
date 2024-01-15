@@ -11,6 +11,13 @@ void DrawInterfaceInner() {
         UI::EndTabItem();
     }
 
+    if (HAS_GPP) {
+        if (UI::BeginTabItem("Ghost Skins")) {
+            DrawGhostSkinsInspector();
+            UI::EndTabItem();
+        }
+    }
+
     UI::EndTabBar();
 }
 
@@ -106,24 +113,24 @@ void DrawCurrentServer() {
 
 void DrawNetPlayerInfo(CTrackManiaPlayerInfo@ pi) {
     if (UI::TreeNode(pi.Name + "##" + pi.Login)) {
-        ClickableLabel("Name", pi.Name);
-        ClickableLabel("Login", pi.Login);
-        ClickableLabel("WebServicesUserId", pi.WebServicesUserId);
+        CopiableLabelValue("Name", pi.Name);
+        CopiableLabelValue("Login", pi.Login);
+        CopiableLabelValue("WebServicesUserId", pi.WebServicesUserId);
         UI::SameLine();
         if (UI::Button("TM.IO")) {
             OpenBrowserURL("https://trackmania.io/#/player/" + pi.WebServicesUserId);
         }
         UI::Text("CarSport:");
         UI::Indent();
-        ClickableLabel("SkinName", pi.Model_CarSport_SkinName);
-        ClickableLabel("SkinOptions", pi.Prestige_SkinOptions);
-        ClickableLabel("SkinUrl", pi.Model_CarSport_SkinUrl);
+        CopiableLabelValue("SkinName", pi.Model_CarSport_SkinName);
+        CopiableLabelValue("SkinOptions", pi.Prestige_SkinOptions);
+        CopiableLabelValue("SkinUrl", pi.Model_CarSport_SkinUrl);
         UI::Unindent();
         UI::Text("CharacterPilot:");
         UI::Indent();
-        ClickableLabel("SkinName", pi.Model_CharacterPilot_SkinName);
-        ClickableLabel("SkinOptions", pi.Character_SkinOptions);
-        ClickableLabel("SkinUrl", pi.Model_CharacterPilot_SkinUrl);
+        CopiableLabelValue("SkinName", pi.Model_CharacterPilot_SkinName);
+        CopiableLabelValue("SkinOptions", pi.Character_SkinOptions);
+        CopiableLabelValue("SkinUrl", pi.Model_CharacterPilot_SkinUrl);
         UI::Unindent();
 
         UI::TreePop();
