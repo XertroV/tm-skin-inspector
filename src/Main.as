@@ -1,6 +1,6 @@
 const string PLUGIN_NAME = Meta::ExecutingPlugin().Name;
 const string PLUGIN_ICON = Icons::Car + Icons::ListAlt;
-const string MenuTitle = "\\$8f3" + PLUGIN_ICON + "\\$z " + PLUGIN_NAME;
+const string MenuTitle = "\\$8c3" + PLUGIN_ICON + "\\$z " + PLUGIN_NAME;
 
 #if DEPENDENCY_GHOSTS_PP || DEV
 bool HAS_GPP = true;

@@ -33,7 +33,6 @@ void DrawSkinLogTable() {
     UI::Dummy(vec2(50, 0));
     UI::SameLine();
     if (UI::Button("Export CSV")) {
-        // Skin_Logs.RemoveRange(0, Skin_Logs.Length);
         startnew(ExportSkinLogCSV);
     }
     UI::SameLine();
@@ -92,17 +91,6 @@ void DrawCurrentServer() {
 
     UI::PushStyleVar(UI::StyleVar::FramePadding, vec2(2, 0));
     if (UI::BeginChild("skincurrchild")) {
-        // if (UI::BeginTable("skinsnet", 8, UI::TableFlags::SizingStretchProp)) {
-        //     UI::ListClipper clip(Skin_Logs.Length);
-        //     while (clip.Step()) {
-        //         for (int i = clip.DisplayStart; i < clip.DisplayEnd; i++) {
-        //             UI::PushID(i);
-        //             Skin_Logs[i].DrawRow();
-        //             UI::PopID();
-        //         }
-        //     }
-        //     UI::EndTable();
-        // }
         for (uint i = 0; i < net.PlayerInfos.Length; i++) {
             DrawNetPlayerInfo(cast<CTrackManiaPlayerInfo>(net.PlayerInfos[i]));
         }

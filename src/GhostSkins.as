@@ -19,6 +19,10 @@ CSystemPackDesc@ CGameCtnGhost_GetSkin(CGameCtnGhost@ g) {
 #if DEPENDENCY_GHOSTS_PP || DEV
 void DrawGhostSkinsInspector() {
     auto ghosts = Ghosts_PP::GetCurrentGhosts(GetApp());
+    if (ghosts.Length == 0) {
+        UI::Text("No loaded ghosts.");
+        return;
+    }
     for (uint i = 0; i < ghosts.Length; i++) {
         UI::PushID('' + i);
         DrawGhostSkinElement(ghosts[i]);
